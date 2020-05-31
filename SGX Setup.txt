@@ -1,0 +1,46 @@
+
+
+Install SGX:
+- Download newest Installation Guide from documentation section of newest "Intel SGX Linux x.y Release" (https://01.org/intel-software-guard-extensions/downloads) and follow it
+- Short installation guide for "Intel SGX Linux 2.5" with Ubuntu 16.04:
+	- Download Driver, PSW and SDK: 
+		- $ wget https://download.01.org/intel-sgx/linux-2.5/ubuntu16.04-server/sgx_linux_x64_driver_f7dc97c.bin https://download.01.org/intel-sgx/linux-2.5/ubuntu16.04-server/libsgx-enclave-common_2.5.101.50123-xenial1_amd64.deb https://download.01.org/intel-sgx/linux-2.5/ubuntu16.04-server/sgx_linux_x64_sdk_2.5.100.49891.bin
+	- To install the packages, be sure that all required libraries are present on your machine: 
+		- $ sudo apt-get install libssl-dev libcurl4-openssl-dev libprotobuf-dev libelf-dev build-essential python
+	- Install the driver: 
+		- $ chmod +x sgx_linux_x64_driver_f7dc97c.bin
+		- $ sudo ./sgx_linux_x64_driver_f7dc97c.bin
+	- Install PSW: 
+		- $ sudo dpkg -i ./libsgx-enclave-common_2.5.101.50123-xenial1_amd64.deb
+	- Install SDK: 
+		- $ chmod +x ./sgx_linux_x64_sdk_2.5.100.49891.bin
+		- $ sudo ./sgx_linux_x64_sdk_2.5.100.49891.bin
+		- Select "/opt/intel" as install directory
+		- Execute "source <path>/environment" as mentioned at the end of the installation
+
+Install Eclipse + SGX Eclipse Plugin
+- Download "Eclipse IDE for C/C++ Developers" (https://www.eclipse.org/downloads/packages/)
+- Install JDK if not present on you machine:
+		- $ sudo add-apt-repository ppa:linuxuprising/java
+		- $ sudo apt update
+		- $ sudo apt install oracle-java12-installer
+- Download Eclipse Plugin from newest "Intel SGX Linux x.y Release" (https://01.org/intel-software-guard-extensions/downloads)
+- Short installation guide for "SGX Eclipse Plugin" with "Intel SGX Linux 2.5":
+	- Download plugin:
+		- $ wget https://download.01.org/intel-sgx/linux-2.5/sgx_eclipse_plugin_2.5.100.49891.zip
+	- Install:
+		- Start Eclipse
+		- Goto Help menu -> Install New Software. Click the "Add" button for the "Work with" field to open the "Add Repository" dialog
+		- Enter "Intel(R) SGX Archive" in the Name field. Click the "Archive..." button and select the location of the downloaded Eclipse plugin archive
+		- Press "Add" to add the archive as a repository
+		- Select the "Intel(R) Software Guard Extensions Plugin" check-box, click on "Next >" and proceed with the usual steps
+	- Configure:
+		- Go to Window menu -> Preferences. Enter Intel(R) SGX in the filter text field to quickly locate the "Intel(R) SGX Preferences" page.
+		- Enter the path for Intel(R) SGX SDK for Linux OS in the "Intel(R) SGX SDK Directory" field.
+
+Create new SGX project in Eclipse:
+- Go to File menu -> New -> Other. Open "C/C++ projects with Intel(R) SGX Enabled"
+- Select "C++ Project" and click on "Next >".
+- Enter a project name, select "Linux GCC" under "Toolchains", click on "Next >" and then "Finish"
+- Right click on your newly created project, select "Intel(R) Software Guard Extensions Tools" > "Add Intel(R) SGX Eclave". Enter a name of your application
+- Right click on your newly created project, select "Intel(R) Software Guard Extensions Tools" > "Add Intel(R) SGX Untrusted Module"
